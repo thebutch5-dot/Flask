@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <p>Сьогодні: <strong>{{ current_day }}</strong></p>
+
+    {% if current_day == "Friday" %}
+        <p style="color: green; font-weight: bold;">🎉 Сьогодні П'ятниця! Діє знижка 10% на все меню! 🎉</p>
+    {% endif %}
+
+    <h2>Товари та ціни:</h2>
+    <ul>
+        {% for item, price in menu.items() %}
+            <li>
+                {{ item }}:
+                {% if current_day == "Friday" %}
+                    <del>{{ price }} грн</del> <strong>{{ (price * 0.9) | round(1) }} грн</strong>
+                {% else %}
+                    <strong>{{ price }} грн</strong>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <p><a href="/">На головну</a></p>
+</body>
+</html>
